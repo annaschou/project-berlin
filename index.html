@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Berlin population project</title>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif;;
+            text-rendering: optimizeLegibility;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .content-text {
+            max-width: 640px;
+            margin: auto;
+            text-align: justify;
+
+        }
+
+        .header {
+            padding: 0.5em 0;
+            text-align: center;
+        }
+
+        a {
+            color: #4c9fc7;
+        }
+
+        .footer {
+            background-color: #f2f1ec ;
+            text-align: center;
+            font-size: 0.8em;
+            margin-top: 2em;
+            padding: 1em 0;
+        }
+
+
+        figcaption {
+            font-size: 0.4em;
+            text-align: center;
+            margin-top: 0.5em;
+            color: #666;
+        }
+
+        h1 {
+            font-family: Georgia, 'Times New Roman', Times, serif;;
+            font-weight: bold;
+            font-size: 2.5em;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-family: Georgia, 'Times New Roman', Times, serif;;
+            font-weight: bold;
+            font-size: 1.25em;
+            line-height: 1.1;
+        }
+
+        .subhead {
+            font-family: Georgia, 'Times New Roman', Times, serif;;
+            font-size: 1.25em;
+            line-height: 1.1;
+        }
+        
+
+        iframe,
+        img {
+            height: auto;
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+            border: none;
+        }
+
+          
+        iframe{
+
+            aspect-ratio: 16/9;
+            padding-top: 1.2em;
+            padding-bottom: 1.2em;
+        }
+
+
+        p {
+            font-family: Georgia, 'Times New Roman', Times, serif;;
+            line-height: 1.6;
+            margin: 0;
+            padding-bottom: 1.2em;
+        }
+
+
+        code {
+            font-family: 'Courier New', monospace;
+            background: #fffbaf;
+            font-size: 0.85em;
+        }
+
+             
+        .image-row {
+        display: flex;
+        justify-content: space-around;
+        gap: 5px;
+        flex-wrap: wrap;
+        }
+
+        .image-container {
+        text-align: center;
+        width: 45%;
+        margin-bottom: 20px; 
+        }
+
+        .image-container img {
+        width: 100%;
+        height: auto;
+
+        }
+
+        .image-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0 5px;
+        }
+
+        .legend-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        font-family: Arial, sans-serif;
+        margin: 20px 0;
+        }
+
+        .legend-item {
+        display: flex;
+        align-items: center;
+        }
+
+        .color-box {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        border: 1px solid #000;
+        }
+
+        /* Farben für die Legende */
+        .low {
+        background-color: #ffece0; /* Gering (helles Beige) */
+        }
+
+        .medium {
+        background-color: #ff5733; /* Mittel (Orange) */
+        }
+
+        .high {
+        background-color: #800040; /* Hoch (Dunkles Lila) */
+        }
+
+    /* Optional: Zentriere die Legende */
+    .legend-container {
+      text-align: center; /* Zentriert die gesamte Legende */
+    }
+        /* margin on mobile */
+        @media (max-width: 640px) {
+            body {
+                overflow-x: hidden;
+                font-size: 18px;
+            }
+
+            .content {
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+            }
+
+            iframe,
+            img,
+            figure{
+            width: 100%; 
+            margin: 0; 
+            overflow: hidden; 
+            }
+
+            .line-chart {
+                height: 80px;
+                transform: scale(2); 
+            }
+        }
+
+        /* darkmode */ 
+        @media (prefers-color-scheme: dark) {
+         body,
+         .footer {
+            background-color: #121212;
+            color: #ffffff;
+            }
+
+        .line-chart {
+            filter: invert(1);
+        }
+
+    </style>
+    <style>
+        .with-image-bg {
+            position: relative;
+            background-size: cover;
+            margin-bottom: 2em;
+
+            /* Center everything inside */
+            min-height: 70svh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Verschiebt den Inhalt nach unten */
+
+            /* White text with a shadow */
+            color: white;
+            text-shadow: 0px 0px 30px black,
+                0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .with-image-bg {
+            background-image: url('bg-image.jpg');
+        }
+
+        .content {
+            text-align: center;
+            margin-bottom: 5%; /* Abstand vom unteren Rand */
+        }
+
+        .content h1 {
+            font-size: 3rem; /* Hauptüberschrift */
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .content .subhead {
+            font-size: 1.5rem; /* Unterüberschrift */
+            margin-top: 0.5rem;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div class="header with-image-bg">
+        <div class="content">
+            <h1>Where Berlin’s Non-Citizens Live</h1>
+            <p class="subhead">A Neighborhood Perspective</p>
+        </div>
+    </div>
+    
+
+    
+    <div class="content-text">
+        <div class="byline">
+            <p>By <a href="https://github.com/annaschou">Anna-Lena Schou</a></p>
+        </div>
+
+        <p>With over 21,000 residents gaining a second nationality in 2024, dual citizenship is on the rise in Berlin. 
+            But how does the city treat non-citizens? An analysis in maps shows where they live and what conditions they face – from cramped housing to air pollution and noise.</p>
+
+
+        <h2>A Divided City: The Berlin Border Shapes Migration</h2>
+
+        <p>The distribution of non-citizens in Berlin reveals clear patterns of the old East-West segregation. Western districts like, Neukölln, and Kreuzberg have become hubs for people without German citizenship. 
+            These areas, often referred to as immigration or arrival neighborhoods, host large populations of non-citizens but are also marked by significant social and economic challenges. </p>
+
+        <p>Meanwhile, eastern areas like Marzahn-Hellersdorf, Lichtenberg, and Treptow-Köpenick see far fewer.</p>
+
+        <p>An exception is Mitte, which has a high proportion of foreigners – both formerly West and formerly East –  highlighting how migration today is concentrated primarily in the city’s core.</p>
+
+        <img src="berlin-migration-wall.svg">
+        
+        <div class="legend-container">
+            <div class="legend-item">
+                <div class="color-box low"></div>
+                <span>low</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box medium"></div>
+                <span>middle</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box high"></div>
+                <span>high</span>
+            </div>
+        </div> 
+        
+        <h2>Tight Spaces and Social Pressure</h2> 
+
+        <p>Districts with non-citizens often struggle with a lack of living space. In Neukölln or parts of Kreuzberg, people have less space per person on average.
+             This overcrowding also puts pressure on schools, childcare centers, and healthcare services.</p>
+
+        <img src="berlin-status-index-no-border.svg">
+        
+        <div class="legend-container">
+            <div class="legend-item">
+                <div class="color-box low"></div>
+                <span>low</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box medium"></div>
+                <span>middle</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box high"></div>
+                <span>high</span>
+            </div>
+        </div> 
+        
+
+        <p> The status index, which measures social and economic conditions, is another indicator of inequality. 
+            In areas like Neukölln and Wedding, part of Berlin Mitte, the index is low, highlighting structural disadvantages and a tough social environment.</p>
+        
+        <h2>Living Among Concrete and Traffic</h2> 
+
+
+        <p>Environmental factors add to the challenges for dual citizens. 
+            Many live in areas with poor air quality, high noise levels, and few green spaces. In Neukölln and Kreuzberg, heavy traffic and dense buildings make the air harder to breathe. The darker the color, the higher the burden.</p>
+
+        <div class="image-row">
+            <div class="image-container">
+            <img src="berlin-air-no-border.svg">
+            <p class="image-title">Air conditions</p>
+            </div>
+
+            <div class="image-container">
+            <img src="berlin-noise-no-border.svg">
+            <p class="image-title">Noise</p>
+            </div>
+        </div>
+        
+        <div class="legend-container">
+            <div class="legend-item">
+                <div class="color-box low"></div>
+                <span>low</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box medium"></div>
+                <span>middle</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box high"></div>
+                <span>high</span>
+            </div>
+        </div> 
+        
+        <p>Noise is another issue. Busy streets and crowded neighborhoods mean constant background noise, which can take a toll on everyday life. At the same time, green spaces — vital for relaxation and recreation — are often scarce in areas like Neukölln or Wedding. 
+            In contrast, western districts like Charlottenburg-Wilmersdorf and Steglitz-Zehlendorf enjoy plenty of parks and greenery.</p>
+
+        <p>These environmental challenges, combined with social pressures, weigh heavily on residents and can affect their quality of life.</p>
+
+        <h2>A Chance for Change</h2>
+
+        <p>Berlin has always been a city of transformation. The question now is whether it can use this wave of naturalizations to build a fairer, greener, and more inclusive future for all its residents.</p>
+
+
+    <div class="footer">
+        <div class="content">
+            <p> <strong>Methodology</strong></p>
+
+            <p> The data used in this analysis are from the <a href="https://daten.berlin.de/">Open Data Portal of the city of Berlin</a>. </p>
+
+            <p>You can find the code for this project <a href="https://github.com/annaschou/project-berlin">here</a>. </p>
+        
+        </div>
+    </div>
+</body>
+</html>
