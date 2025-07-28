@@ -44,6 +44,7 @@ While the analysis was insightful, there were areas left unexplored due to time 
 - Refining Visualizations: I had planned to export the maps to Illustrator for further refinement, but I ran out of time due to the complexity of data collection and analysis.
 - Expanding the Scope: Including additional datasets, such as migration trends over time or comparisons with other 
 German cities, could have provided a broader context. Also I wanted to include data before the fall of the Berlin Wall but I have not found any data. 
+- Scrollytelling: I tried to do a scrollytellig page but also here I ran out of tmie.
 
 Originally, I had planned to create a map-based analysis of "anxiety spaces" in Berlin, but this project evolved into a broader exploration of social and environmental inequalities faced by non-citizens. Despite the challenges, I gained valuable experience in GIS and spatial data analysis, which will inform my future work.
 
